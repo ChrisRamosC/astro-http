@@ -6,12 +6,10 @@ export const prerender = false;
 export const GET: APIRoute = async ({ params, request }) => {
   const { slug } = params;
 
-  //   request.body
-
   const post = await getEntry('blog', slug as any);
 
   if (!post) {
-    return new Response(JSON.stringify({ msg: `Post ${slug} not found.` }), {
+    return new Response(JSON.stringify({ msg: `Post ${slug} not found` }), {
       status: 404,
       headers: {
         'Content-Type': 'application/json',
@@ -21,17 +19,11 @@ export const GET: APIRoute = async ({ params, request }) => {
 
   return new Response(JSON.stringify(post), {
     status: 200,
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+    },
   });
 };
-
-// export const getStatichPaths: GetStaticPaths = async () => {
-//   return [
-//     {
-//       params: { slug: 'first-post' },
-//     },
-//   ];
-// };
 
 export const POST: APIRoute = async ({ params, request }) => {
   const body = await request.json();
@@ -43,7 +35,9 @@ export const POST: APIRoute = async ({ params, request }) => {
     }),
     {
       status: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+      },
     }
   );
 };
@@ -58,7 +52,9 @@ export const PUT: APIRoute = async ({ params, request }) => {
     }),
     {
       status: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+      },
     }
   );
 };
@@ -73,15 +69,15 @@ export const PATCH: APIRoute = async ({ params, request }) => {
     }),
     {
       status: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+      },
     }
   );
 };
 
-export const DELETE: APIRoute = async ({ params, request, cookies }) => {
-  console.log('🚀 ~ constDELETE:APIRoute= ~ cookies:', cookies)
+export const DELETE: APIRoute = async ({ params, request }) => {
   const { slug } = params;
-  
 
   return new Response(
     JSON.stringify({
@@ -90,7 +86,17 @@ export const DELETE: APIRoute = async ({ params, request, cookies }) => {
     }),
     {
       status: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+      },
     }
   );
 };
+
+// export const getStaticPaths: GetStaticPaths = async () => {
+//   return [
+//     {
+//       params: { slug: 'first-post' },
+//     },
+//   ];
+// };
